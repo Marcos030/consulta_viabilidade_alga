@@ -260,8 +260,8 @@ function App() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td className={resultado.viabilidade === 'Viável' ? 'viavel' : 'nao-viavel'}>
-                      {resultado.viabilidade}
+                    <td className={resultado.detalhes?.viabilidade_atual === 'Viável' ? 'viavel' : 'nao-viavel'}>
+                      {resultado.detalhes?.viabilidade_atual || resultado.viabilidade || '-'}
                     </td>
                     <td>{resultado.detalhes?.municipio || '-'}</td>
                     <td>{resultado.detalhes?.bairro || '-'}</td>

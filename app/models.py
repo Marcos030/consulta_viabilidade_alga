@@ -13,6 +13,7 @@ class ConsultaRequest(BaseModel):
 
 class EnderecoDetalhes(BaseModel):
     """Modelo para detalhes do endereço."""
+    viabilidade_atual: Optional[str] = None
     uf: Optional[str] = None
     municipio: Optional[str] = None
     localidade: Optional[str] = None

@@ -50,6 +50,7 @@ class EnderecoService:
         if resultado:
             # Endereço encontrado
             detalhes = EnderecoDetalhes(
+                viabilidade_atual=resultado.get('viabilidade_atual'),
                 uf=resultado.get('uf'),
                 municipio=resultado.get('municipio'),
                 localidade=resultado.get('localidade'),
