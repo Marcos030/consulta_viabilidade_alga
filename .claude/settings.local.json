@@ -4,7 +4,10 @@
       "Bash(git init:*)",
       "Bash(git branch:*)",
       "Bash(git remote add:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Sistema de Consulta de Viabilidade de Endereços\n\n- Backend FastAPI com endpoints de consulta, upload e limpeza\n- Frontend React + Vite com interface responsiva\n- Consulta de CEP com máscara e validações\n- Upload de planilha com timer e progress bar\n- Modal de confirmação para limpar base\n- Configuração para deploy no Render.com\n- Documentação completa\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
