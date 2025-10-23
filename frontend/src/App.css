@@ -1,0 +1,496 @@
+/* ========== VARIÁVEIS ========== */
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --danger-color: #dc2626;
+  --danger-hover: #b91c1c;
+  --success-color: #16a34a;
+  --error-color: #dc2626;
+  --bg-color: #f5f5f5;
+  --card-bg: #ffffff;
+  --text-color: #333;
+  --text-light: #666;
+  --border-color: #e5e5e5;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --spacing: 1.5rem;
+}
+
+/* ========== RESET E GLOBAL ========== */
+.app {
+  min-height: 100vh;
+  background-color: var(--bg-color);
+}
+
+/* ========== HEADER ========== */
+.header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #1e40af 100%);
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.header h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.header p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* ========== MAIN CONTENT ========== */
+.main-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* ========== SEÇÕES ========== */
+section {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.3s ease;
+}
+
+section:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-color);
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 0.5rem;
+}
+
+/* ========== FORMULÁRIOS ========== */
+.form-consulta,
+.form-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+label {
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+input[type="text"] {
+  padding: 0.75rem;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+input[type="text"].input-erro {
+  border-color: var(--error-color);
+}
+
+input[type="text"].input-erro:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.erro-campo {
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-top: -0.25rem;
+}
+
+/* ========== FILE UPLOAD ========== */
+input[type="file"] {
+  display: none;
+}
+
+.label-file {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-align: center;
+  font-weight: 500;
+}
+
+.label-file:hover {
+  background: var(--primary-hover);
+}
+
+.nome-arquivo {
+  display: block;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #f0f9ff;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.dica {
+  display: block;
+  color: var(--text-light);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+/* ========== BOTÕES ========== */
+.btn {
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.btn-danger {
+  background: var(--danger-color);
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: var(--danger-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.btn-secondary {
+  background: #6b7280;
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #4b5563;
+}
+
+/* ========== TABELA DE RESULTADOS ========== */
+.resultado {
+  margin-top: 1.5rem;
+}
+
+.resultado h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.tabela-resultado {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--border-color);
+}
+
+.tabela-resultado thead {
+  background: var(--primary-color);
+  color: white;
+}
+
+.tabela-resultado th,
+.tabela-resultado td {
+  padding: 1rem;
+  text-align: left;
+}
+
+.tabela-resultado th {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.tabela-resultado tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.2s ease;
+}
+
+.tabela-resultado tbody tr:hover {
+  background: #f9fafb;
+}
+
+.tabela-resultado td.viavel {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.tabela-resultado td.nao-viavel {
+  color: var(--danger-color);
+  font-weight: 600;
+}
+
+/* ========== MENSAGENS ========== */
+.mensagem {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.mensagem.erro {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.mensagem.sucesso {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+/* ========== PROGRESS BAR ========== */
+.upload-progress {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #f0f9ff;
+  border-radius: 8px;
+  border: 1px solid #bfdbfe;
+}
+
+.timer {
+  text-align: center;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.timer strong {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e0e7ff;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), #3b82f6);
+  animation: progress 2s ease-in-out infinite;
+}
+
+@keyframes progress {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 70%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.texto-progresso {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* ========== SEÇÃO LIMPAR ========== */
+.secao-limpar {
+  border: 2px solid var(--danger-color);
+}
+
+.descricao-limpar {
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+/* ========== MODAL ========== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--danger-color);
+}
+
+.modal-content p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.modal-buttons .btn {
+  min-width: 100px;
+}
+
+/* ========== RESPONSIVIDADE ========== */
+
+/* Tablet e Desktop */
+@media (min-width: 768px) {
+  .header h1 {
+    font-size: 2.25rem;
+  }
+
+  .header p {
+    font-size: 1.125rem;
+  }
+
+  .main-content {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+  }
+
+  .secao-consulta {
+    grid-column: 1;
+  }
+
+  .secao-lateral {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-consulta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-consulta .btn {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Desktop grande */
+@media (min-width: 1024px) {
+  .main-content {
+    padding: 3rem 2rem;
+  }
+
+  section {
+    padding: 2rem;
+  }
+}
+
+/* Mobile ajustes */
+@media (max-width: 767px) {
+  .header {
+    padding: 1.5rem 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .header p {
+    font-size: 0.9rem;
+  }
+
+  section h2 {
+    font-size: 1.25rem;
+  }
+
+  .tabela-resultado {
+    font-size: 0.875rem;
+  }
+
+  .tabela-resultado th,
+  .tabela-resultado td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+  }
+
+  .modal-buttons .btn {
+    width: 100%;
+  }
+}
