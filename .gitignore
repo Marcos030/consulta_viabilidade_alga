@@ -33,11 +33,11 @@ ENV/
 *.swo
 *~
 
-# Database
-*.db
+# Database (exceto enderecos.db que é commitado)
 *.db-journal
 *.sqlite
 *.sqlite3
+!data/enderecos.db
 
 # Data files
 # Permitir enderecos.db no repositório para deploy com dados pré-populados
