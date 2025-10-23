@@ -47,14 +47,33 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-# Configurar CORS
+# Configurar CORS - IMPORTANTE: deve ser o primeiro middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permite todas as origens (use domínios específicos em produção)
+    allow_origins=["*"],  # Permite todas as origens
     allow_credentials=True,
-    allow_methods=["*"],  # Permite todos os métodos (GET, POST, DELETE, etc)
+    allow_methods=["*"],  # Permite todos os métodos (GET, POST, DELETE, OPTIONS, etc)
     allow_headers=["*"],  # Permite todos os headers
+    expose_headers=["*"],  # Expõe todos os headers na resposta
 )
+
+
+# Handler para requisições OPTIONS (preflight)
+@app.options("/{full_path:path}")
+async def options_handler(full_path: str):
+    """
+    Handler para requisições OPTIONS (CORS preflight).
+    Garante que o navegador aceite requisições de outras origens.
+    """
+    return JSONResponse(
+        content={"message": "OK"},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Max-Age": "86400",  # Cache preflight por 24h
+        }
+    )
 
 
 @app.get("/", tags=["Root"])
