@@ -1,16 +1,16 @@
 # FastAPI e servidor
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
-python-multipart==0.0.6
+fastapi>=0.104.0,<0.115.0
+uvicorn[standard]>=0.24.0,<0.32.0
+python-multipart>=0.0.6,<0.1.0
 
-# Processamento de dados - versões otimizadas para Render
-pandas==2.0.3
-numpy==1.24.3
-openpyxl==3.1.2
+# Processamento de dados - versões com wheels pré-compilados
+pandas>=2.1.0,<2.3.0
+numpy>=1.26.0,<2.0.0
+openpyxl>=3.1.0,<3.2.0
 
 # Validação
-pydantic==2.5.0
-pydantic-settings==2.1.0
+pydantic>=2.5.0,<3.0.0
+pydantic-settings>=2.1.0,<3.0.0
 
 # Utilitários
-python-dotenv==1.0.0
+python-dotenv>=1.0.0,<2.0.0
