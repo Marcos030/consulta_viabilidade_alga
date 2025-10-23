@@ -41,8 +41,7 @@ ENV/
 
 # Data files
 data/enderecos.db
-# Permitir enderecos_nordeste.xlsx no repositório
-# data/uploads/enderecos_nordeste.xlsx
+data/uploads/*.xlsx
 data/uploads/*.xls
 
 # Environment

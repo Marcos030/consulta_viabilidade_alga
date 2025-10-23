@@ -150,8 +150,25 @@ class Database:
         cep_normalizado = cep.replace('-', '').replace('.', '').strip()
         cod_normalizado = str(cod_logradouro).strip()
 
+        logger.info(f"[DB] Consultando: CEP={cep_normalizado}, COD={cod_normalizado}")
+
         with self.get_connection() as conn:
             cursor = conn.cursor()
+
+            # Verificar total de registros no banco
+            cursor.execute("SELECT COUNT(*) as total FROM enderecos")
+            total = cursor.fetchone()['total']
+            logger.info(f"[DB] Total de registros no banco: {total}")
+
+            # Verificar se existe algum registro com esse CEP
+            cursor.execute("SELECT COUNT(*) as count FROM enderecos WHERE cep = ?", (cep_normalizado,))
+            count_cep = cursor.fetchone()['count']
+            logger.info(f"[DB] Registros com CEP {cep_normalizado}: {count_cep}")
+
+            # Verificar se existe algum registro com esse código
+            cursor.execute("SELECT COUNT(*) as count FROM enderecos WHERE cod_logradouro = ?", (cod_normalizado,))
+            count_cod = cursor.fetchone()['count']
+            logger.info(f"[DB] Registros com COD {cod_normalizado}: {count_cod}")
 
             query = """
                 SELECT
@@ -178,7 +195,10 @@ class Database:
             row = cursor.fetchone()
 
             if row:
+                logger.info(f"[DB] ✅ Registro encontrado!")
                 return dict(row)
+
+            logger.warning(f"[DB] ❌ Nenhum registro encontrado com CEP={cep_normalizado} e COD={cod_normalizado}")
             return None
 
     def get_stats(self) -> Dict[str, Any]:
