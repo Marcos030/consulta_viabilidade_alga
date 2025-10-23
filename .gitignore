@@ -40,7 +40,8 @@ ENV/
 *.sqlite3
 
 # Data files
-data/enderecos.db
+# Permitir enderecos.db no repositório para deploy com dados pré-populados
+# data/enderecos.db
 data/uploads/*.xlsx
 data/uploads/*.xls
 
