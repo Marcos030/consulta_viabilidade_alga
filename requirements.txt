@@ -3,8 +3,9 @@ fastapi==0.104.1
 uvicorn[standard]==0.24.0
 python-multipart==0.0.6
 
-# Processamento de dados
-pandas==2.1.3
+# Processamento de dados - versões otimizadas para Render
+pandas==2.0.3
+numpy==1.24.3
 openpyxl==3.1.2
 
 # Validação
