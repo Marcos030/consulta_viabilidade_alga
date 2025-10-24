@@ -153,7 +153,7 @@ class Database:
         logger.info(f"[DB] Consultando: CEP={cep_normalizado}, N_FACHADA={n_fachada_normalizado}")
 
         with self.get_connection() as conn:
-            cursor = cursor.cursor()
+            cursor = conn.cursor()
 
             # Verificar total de registros no banco
             cursor.execute("SELECT COUNT(*) as total FROM enderecos")
