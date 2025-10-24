@@ -4,11 +4,11 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 /**
  * Consulta viabilidade de um endereço
  * @param {string} cep - CEP sem máscara (apenas números)
- * @param {string} codLogradouro - Código do logradouro
+ * @param {string} numero - Número da fachada
  */
-export const consultarViabilidade = async (cep, codLogradouro) => {
+export const consultarViabilidade = async (cep, numero) => {
   const response = await fetch(
-    `${API_URL}/consultar?cep=${cep}&cod_logradouro=${codLogradouro}`
+    `${API_URL}/consultar?cep=${cep}&numero=${numero}`
   );
 
   if (!response.ok) {

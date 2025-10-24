@@ -22,13 +22,13 @@ class EnderecoService:
     """Serviço para operações relacionadas a endereços."""
 
     @staticmethod
-    def consultar_viabilidade(cep: str, cod_logradouro: str) -> ConsultaResponse:
+    def consultar_viabilidade(cep: str, n_fachada: str) -> ConsultaResponse:
         """
         Consulta a viabilidade de um endereço.
 
         Args:
             cep: CEP do endereço
-            cod_logradouro: Código do logradouro
+            n_fachada: Número da fachada
 
         Returns:
             ConsultaResponse com o resultado da consulta
@@ -42,10 +42,10 @@ class EnderecoService:
 
         # Normalizar entradas
         cep_normalizado = normalizar_cep(cep)
-        cod_normalizado = str(cod_logradouro).strip()
+        n_fachada_normalizado = str(n_fachada).strip()
 
         # Consultar no banco
-        resultado = db.consultar_viabilidade(cep_normalizado, cod_normalizado)
+        resultado = db.consultar_viabilidade(cep_normalizado, n_fachada_normalizado)
 
         if resultado:
             # Endereço encontrado
@@ -76,7 +76,7 @@ class EnderecoService:
             # Endereço não encontrado
             return ConsultaResponse(
                 encontrado=False,
-                mensagem=f"Endereço não encontrado para CEP {cep} e Código {cod_logradouro}"
+                mensagem=f"Endereço não encontrado para CEP {cep} e Número {n_fachada}"
             )
 
     @staticmethod

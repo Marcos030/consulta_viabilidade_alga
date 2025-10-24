@@ -5,7 +5,7 @@ import { consultarViabilidade, uploadPlanilha, limparBase } from './api';
 function App() {
   // Estados para Consulta de CEP
   const [cep, setCep] = useState('');
-  const [codLogradouro, setCodLogradouro] = useState('');
+  const [numero, setNumero] = useState('');
   const [resultado, setResultado] = useState(null);
   const [loadingConsulta, setLoadingConsulta] = useState(false);
   const [erroConsulta, setErroConsulta] = useState('');
@@ -41,11 +41,11 @@ function App() {
     setCep(valorFormatado);
   };
 
-  // Handler para o campo Código do Logradouro
-  const handleCodLogradouroChange = (e) => {
+  // Handler para o campo Número
+  const handleNumeroChange = (e) => {
     // Aceita apenas números
     const valor = e.target.value.replace(/\D/g, '');
-    setCodLogradouro(valor);
+    setNumero(valor);
   };
 
   // Validação dos campos
@@ -54,12 +54,12 @@ function App() {
     return apenasNumeros.length === 8;
   };
 
-  const isCodLogradouroValido = () => {
-    return codLogradouro.length > 0;
+  const isNumeroValido = () => {
+    return numero.length > 0;
   };
 
   const isPesquisaHabilitada = () => {
-    return isCepValido() && isCodLogradouroValido() && !loadingConsulta;
+    return isCepValido() && isNumeroValido() && !loadingConsulta;
   };
 
   // Handler para pesquisar endereço
@@ -75,7 +75,7 @@ function App() {
     try {
       // Remove a máscara do CEP antes de enviar
       const cepSemMascara = cep.replace(/\D/g, '');
-      const dados = await consultarViabilidade(cepSemMascara, codLogradouro);
+      const dados = await consultarViabilidade(cepSemMascara, numero);
       setResultado(dados);
 
       if (!dados.encontrado) {
@@ -219,14 +219,14 @@ function App() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="cod-logradouro">Código do Logradouro *</label>
+              <label htmlFor="numero">Número *</label>
               <input
                 type="text"
-                id="cod-logradouro"
-                value={codLogradouro}
-                onChange={handleCodLogradouroChange}
-                placeholder="Ex: 13784"
-                className={codLogradouro && !isCodLogradouroValido() ? 'input-erro' : ''}
+                id="numero"
+                value={numero}
+                onChange={handleNumeroChange}
+                placeholder="Ex: 144"
+                className={numero && !isNumeroValido() ? 'input-erro' : ''}
                 required
               />
             </div>

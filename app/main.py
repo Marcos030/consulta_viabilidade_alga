@@ -125,18 +125,18 @@ async def consultar_viabilidade(
         description="CEP do endereço (com ou sem hífen)",
         example="60876672"
     ),
-    cod_logradouro: str = Query(
+    numero: str = Query(
         ...,
-        description="Código do logradouro",
-        example="13784"
+        description="Número da fachada",
+        example="144"
     )
 ):
     """
-    Consulta a viabilidade de um endereço pelo CEP e código do logradouro.
+    Consulta a viabilidade de um endereço pelo CEP e número da fachada.
 
     ## Parâmetros
     - **cep**: CEP do endereço (pode ser com ou sem hífen: 60876-672 ou 60876672)
-    - **cod_logradouro**: Código do logradouro
+    - **numero**: Número da fachada
 
     ## Resposta
     - **encontrado**: Se o endereço foi encontrado
@@ -146,11 +146,11 @@ async def consultar_viabilidade(
 
     ## Exemplo
     ```
-    GET /consultar?cep=60876672&cod_logradouro=13784
+    GET /consultar?cep=60876672&numero=144
     ```
     """
-    logger.info(f"Consultando viabilidade: CEP={cep}, COD={cod_logradouro}")
-    return endereco_service.consultar_viabilidade(cep, cod_logradouro)
+    logger.info(f"Consultando viabilidade: CEP={cep}, NUMERO={numero}")
+    return endereco_service.consultar_viabilidade(cep, numero)
 
 
 @app.post(
