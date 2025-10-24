@@ -134,26 +134,26 @@ class Database:
     def consultar_viabilidade(
         self,
         cep: str,
-        cod_logradouro: str
+        n_fachada: str
     ) -> Optional[Dict[str, Any]]:
         """
-        Consulta a viabilidade de um endereço pelo CEP e código do logradouro.
+        Consulta a viabilidade de um endereço pelo CEP e número da fachada.
 
         Args:
             cep: CEP (com ou sem hífen)
-            cod_logradouro: Código do logradouro
+            n_fachada: Número da fachada
 
         Returns:
             Dicionário com dados do endereço ou None se não encontrado
         """
         # Normalizar CEP (remover hífen se existir)
         cep_normalizado = cep.replace('-', '').replace('.', '').strip()
-        cod_normalizado = str(cod_logradouro).strip()
+        n_fachada_normalizado = str(n_fachada).strip()
 
-        logger.info(f"[DB] Consultando: CEP={cep_normalizado}, COD={cod_normalizado}")
+        logger.info(f"[DB] Consultando: CEP={cep_normalizado}, N_FACHADA={n_fachada_normalizado}")
 
         with self.get_connection() as conn:
-            cursor = conn.cursor()
+            cursor = cursor.cursor()
 
             # Verificar total de registros no banco
             cursor.execute("SELECT COUNT(*) as total FROM enderecos")
@@ -165,10 +165,23 @@ class Database:
             count_cep = cursor.fetchone()['count']
             logger.info(f"[DB] Registros com CEP {cep_normalizado}: {count_cep}")
 
-            # Verificar se existe algum registro com esse código
-            cursor.execute("SELECT COUNT(*) as count FROM enderecos WHERE cod_logradouro = ?", (cod_normalizado,))
-            count_cod = cursor.fetchone()['count']
-            logger.info(f"[DB] Registros com COD {cod_normalizado}: {count_cod}")
+            # Verificar se existe algum registro com esse número
+            cursor.execute("SELECT COUNT(*) as count FROM enderecos WHERE n_fachada = ?", (n_fachada_normalizado,))
+            count_num = cursor.fetchone()['count']
+            logger.info(f"[DB] Registros com N_FACHADA {n_fachada_normalizado}: {count_num}")
+
+            # DEBUG: Mostrar alguns registros com esse CEP
+            cursor.execute("""
+                SELECT n_fachada, logradouro, municipio
+                FROM enderecos
+                WHERE cep = ?
+                LIMIT 5
+            """, (cep_normalizado,))
+            exemplos = cursor.fetchall()
+            logger.info(f"[DB] DEBUG - Exemplos de n_fachada para CEP {cep_normalizado}:")
+            for ex in exemplos:
+                n_fach = ex['n_fachada']
+                logger.info(f"[DB]   n_fachada='{n_fach}' | len={len(str(n_fach))} | logradouro={ex['logradouro']}")
 
             query = """
                 SELECT
@@ -187,18 +200,18 @@ class Database:
                     cep,
                     total_hps
                 FROM enderecos
-                WHERE cep = ? AND cod_logradouro = ?
+                WHERE cep = ? AND n_fachada = ?
                 LIMIT 1
             """
 
-            cursor.execute(query, (cep_normalizado, cod_normalizado))
+            cursor.execute(query, (cep_normalizado, n_fachada_normalizado))
             row = cursor.fetchone()
 
             if row:
                 logger.info(f"[DB] ✅ Registro encontrado!")
                 return dict(row)
 
-            logger.warning(f"[DB] ❌ Nenhum registro encontrado com CEP={cep_normalizado} e COD={cod_normalizado}")
+            logger.warning(f"[DB] ❌ Nenhum registro encontrado com CEP={cep_normalizado} e N_FACHADA={n_fachada_normalizado}")
             return None
 
     def get_stats(self) -> Dict[str, Any]:
